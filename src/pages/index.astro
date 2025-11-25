@@ -2,7 +2,9 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import HorizontalCard from "../components/HorizontalCard.astro";
 import { getCollection } from "astro:content";
+import BrandedBanner from '../components/BrandedFloatingBanner.css-only.astro';
 import createSlug from "../lib/createSlug"
+
 
 const posts = (await getCollection("blog")).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
@@ -76,3 +78,11 @@ const last_posts = posts.slice(0, 3);
     ))
   }
 </BaseLayout>
+
+<BrandedBanner
+  brandName="StrongBody"
+  logoSrc="/assets/logo.svg"
+  tagline="Build your shop in minutes"
+  cta={{ label: "Start Now", href: "/create" }}
+  position="bottom-right"
+/>
