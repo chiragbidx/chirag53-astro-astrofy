@@ -1,17 +1,26 @@
 ---
+/*
+  BrandedFloatingBanner.css-only.astro
+  - Always visible floating branding banner (bottom-right)
+  - No toggle, no JS, no CTA
+  - Defaults:
+      brandName: "BuildX"
+      logoSrc: remote URL (the one you provided)
+      tagline: "Build an app in minutes"
+*/
 const {
-  brandName = "Your Brand",
-  logoSrc = null,
-  tagline = "",
-  cta = null,
+  brandName = "BuildX",
+  // default logo URL provided by you
+  logoSrc = "https://78f1f0dd390afac459a74c052d38e107.cdn.bubble.io/f1764063156347x502743062572252900/logo.png",
+  tagline = "Build an app in minutes",
+  // position prop kept for API-compatibility but ignored — banner is always bottom-right
   position = "bottom-right",
   bgColorClass = "bg-white",
   textColorClass = "text-slate-900",
 } = Astro.props;
 ---
-
 <style>
-  /* Small optional styling to make sure image looks good */
+  /* Ensure logo fits the layout */
   .bfb-logo {
     width: 40px;
     height: 40px;
@@ -20,9 +29,7 @@ const {
 </style>
 
 <div
-  class={`fixed z-[9999] bottom-6 ${
-    position === "bottom-left" ? "left-4 md:left-8" : "right-4 md:right-8"
-  } max-w-[320px] md:max-w-sm`}
+  class="fixed z-[9999] bottom-6 right-4 md:right-8 max-w-[320px] md:max-w-sm"
   role="complementary"
   aria-label={`${brandName} branding`}
 >
@@ -43,29 +50,7 @@ const {
           <p class="mt-1 text-sm leading-snug opacity-90 truncate">{tagline}</p>
         )}
 
-        {cta && (
-          <p class="mt-2">
-            <a
-              href={cta.href}
-              class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-sm font-medium shadow-sm ring-1 ring-inset"
-            >
-              {cta.label}
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="h-4 w-4"
-                viewBox="0 0 20 20"
-                fill="currentColor"
-                aria-hidden
-              >
-                <path
-                  fill-rule="evenodd"
-                  d="M12.293 3.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-8 8a1 1 0 01-1.414-1.414L15.586 8H6a1 1 0 110-2h9.586l-3.293-3.293a1 1 0 010-1.414z"
-                  clip-rule="evenodd"
-                />
-              </svg>
-            </a>
-          </p>
-        )}
+        <!-- CTA intentionally removed per request -->
       </div>
     </div>
   </div>
