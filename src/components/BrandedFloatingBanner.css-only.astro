@@ -1,30 +1,40 @@
 ---
 /*
-  BrandedFloatingBanner.css-only.astro
-  - Always visible floating branding banner (bottom-right)
-  - No toggle, no JS, no CTA
-  - Defaults:
-      brandName: "BuildX"
-      logoSrc: remote URL (the one you provided)
-      tagline: "Build an app in minutes"
+  Updated per request:
+  - BrandName → 16px, bold
+  - Tagline → 12px
+  - Spacing between them = 4px
+  - No CTA
+  - Always bottom-right
 */
 const {
   brandName = "BuildX",
-  // default logo URL provided by you
   logoSrc = "https://78f1f0dd390afac459a74c052d38e107.cdn.bubble.io/f1764063156347x502743062572252900/logo.png",
   tagline = "Build an app in minutes",
-  // position prop kept for API-compatibility but ignored — banner is always bottom-right
   position = "bottom-right",
   bgColorClass = "bg-white",
   textColorClass = "text-slate-900",
 } = Astro.props;
 ---
+
 <style>
-  /* Ensure logo fits the layout */
   .bfb-logo {
     width: 40px;
     height: 40px;
     object-fit: contain;
+  }
+
+  .bfb-brand {
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+
+  .bfb-tagline {
+    font-size: 12px;
+    line-height: 1.2;
+    margin-top: 4px; /* requested spacing */
+    opacity: 0.9;
   }
 </style>
 
@@ -42,15 +52,11 @@ const {
       )}
 
       <div class="flex-1 min-w-0">
-        <h3 class="font-semibold truncate" title={brandName}>
-          {brandName}
-        </h3>
+        <p class="bfb-brand truncate" title={brandName}>{brandName}</p>
 
         {tagline && (
-          <p class="mt-1 text-sm leading-snug opacity-90 truncate">{tagline}</p>
+          <p class="bfb-tagline truncate" title={tagline}>{tagline}</p>
         )}
-
-        <!-- CTA intentionally removed per request -->
       </div>
     </div>
   </div>
