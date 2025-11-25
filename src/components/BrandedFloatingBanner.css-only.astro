@@ -1,17 +1,13 @@
 ---
 /*
-  Updated per request:
-  - BrandName → 16px, bold
-  - Tagline → 12px
-  - Spacing between them = 4px
-  - No CTA
-  - Always bottom-right
+  Fully clickable BuildX banner → links to https://buildx.ai
+  No CTA button, entire card is the link.
+  BrandName 16px bold, Tagline 12px with 4px spacing.
 */
 const {
   brandName = "BuildX",
   logoSrc = "https://78f1f0dd390afac459a74c052d38e107.cdn.bubble.io/f1764063156347x502743062572252900/logo.png",
   tagline = "Build an app in minutes",
-  position = "bottom-right",
   bgColorClass = "bg-white",
   textColorClass = "text-slate-900",
 } = Astro.props;
@@ -33,31 +29,45 @@ const {
   .bfb-tagline {
     font-size: 12px;
     line-height: 1.2;
-    margin-top: 4px; /* requested spacing */
+    margin-top: 4px;
     opacity: 0.9;
+  }
+
+  /* Make the entire card clickable with no default link underline */
+  .bfb-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
   }
 </style>
 
 <div
   class="fixed z-[9999] bottom-6 right-4 md:right-8 max-w-[320px] md:max-w-sm"
   role="complementary"
-  aria-label={`${brandName} branding`}
+  aria-label="BuildX branding"
 >
-  <div
-    class={`shadow-2xl rounded-2xl overflow-hidden transform transition-all duration-300 ring-2 ring-slate-200 ${bgColorClass} ${textColorClass}`}
+  <a
+    href="https://buildx.ai"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="bfb-link"
   >
-    <div class="flex items-center gap-3 p-3">
-      {logoSrc && (
-        <img src={logoSrc} alt={`${brandName} logo`} class="bfb-logo rounded-md" />
-      )}
-
-      <div class="flex-1 min-w-0">
-        <p class="bfb-brand truncate" title={brandName}>{brandName}</p>
-
-        {tagline && (
-          <p class="bfb-tagline truncate" title={tagline}>{tagline}</p>
+    <div
+      class={`shadow-2xl rounded-2xl overflow-hidden transform transition-all duration-300 ring-2 ring-slate-200 ${bgColorClass} ${textColorClass}`}
+    >
+      <div class="flex items-center gap-3 p-3">
+        {logoSrc && (
+          <img src={logoSrc} alt="BuildX logo" class="bfb-logo rounded-md" />
         )}
+
+        <div class="flex-1 min-w-0">
+          <p class="bfb-brand truncate" title={brandName}>{brandName}</p>
+
+          {tagline && (
+            <p class="bfb-tagline truncate" title={tagline}>{tagline}</p>
+          )}
+        </div>
       </div>
     </div>
-  </div>
+  </a>
 </div>
